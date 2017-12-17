@@ -9,11 +9,14 @@ touch /stop.drupal_not_ready
 print_welcome_page
 
 if [[ "$1" == "nami" && "$2" == "start" ]] || [[ "$1" == "/run.sh" ]]; then
+  info "Starting drupal... "
   nami_initialize apache php drupal
 
-  info "Starting drupal... "
+  info "Starting drupalExtension... "
+  /install_drupalExtension.sh
 fi
 
 rm /stop.drupal_not_ready
 
+info "Starting... "
 exec tini -- "$@"
